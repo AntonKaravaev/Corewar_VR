@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 13:00:55 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/11/08 18:16:45 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/11/10 16:47:47 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,13 @@ int		ft_check_pos(int pos)
 	return (pos);
 }
 
+int		ft_check_dump(int dump)
+{
+	if (dump <= 0)
+		ft_error("Incorrect dump.");
+	return (1);
+}
+
 void	ft_find_flags(t_val *val, char ***str)
 {
 	int i;
@@ -70,7 +77,7 @@ void	ft_find_flags(t_val *val, char ***str)
 	pos = 0;
 	while ((*str)[i] != NULL)
 	{
-		if (ft_strstr((*str)[i], ".cor") != NULL)
+		if (ft_strstr((*str)[i], ".cor") != NULL && (*str)[i][0] != '.')
 		{
 			if (val->amount_of_players > MAX_PLAYERS)
 				ft_error("Too many players.");
@@ -90,7 +97,7 @@ void	ft_find_flags(t_val *val, char ***str)
 				i++;
 				if ((*str)[i] == NULL)
 					ft_error("Incorrect input.");
-				if (ft_strstr((*str)[i], ".cor") != NULL)
+				if (ft_strstr((*str)[i], ".cor") != NULL && (*str)[i][0] != '.')
 				{
 					ft_strcat(val->players[pos], (*str)[i]);
 					val->amount_of_players++;
@@ -107,7 +114,7 @@ void	ft_find_flags(t_val *val, char ***str)
 			{
 				val->flag_dump = 1;
 				if ((*str)[++i] != NULL)
-					val->dump_value = ft_atoi((*str)[i]);
+					val->dump_value = ft_check_dump(ft_atoi((*str)[i]));
 				else
 					ft_error("Incorrect input ""-dump"" value.");
 			}
@@ -125,18 +132,19 @@ void	ft_find_flags(t_val *val, char ***str)
 			ft_error("Incorrect input.");
 		i++;
 	}
-	i = 0;
 	if (val->amount_of_players == 0)
 		ft_error("No players.");
 	if (val->amount_of_players > MAX_PLAYERS)
 		ft_error("Too much players.");
-	while (i < val->amount_of_players)
+	i = 0;
+	j = 0;
+	while (i < MAX_PLAYERS)
 	{
 		if (val->players[i][0] == 0)
 		{
 			while (j < val->amount_of_players)
 			{
-				if (val->temp_players[j] != NULL)
+				if (val->temp_players[j][0] != 0)
 				{
 					ft_strcat(val->players[i], val->temp_players[j]);
 					j++;
@@ -148,28 +156,18 @@ void	ft_find_flags(t_val *val, char ***str)
 		i++;
 	}
 	i = 0;
-	j = 0;
 	z = 0;
-	ft_printf("%d\n", val->amount_of_players);
 	while (i < MAX_PLAYERS)
 	{
 		if (val->players[i][0] == 0)
 		{
-			ft_printf("Hello\n");
-			while (j < MAX_PLAYERS && val->players[j][0] == 0)
-				j++;
-			if (val->temp_players[j][0] != 0)
+			z = i;
+			while (z < MAX_PLAYERS && val->players[z][0] == 0)
+				z++;
+			if (z < MAX_PLAYERS && val->players[z][0] != 0)
 			{
-				ft_strcat(val->players[i], val->temp_players[j]);
-				j++;
-			}
-			else
-			{
-				z = i;
-				while (z < MAX_PLAYERS && val->players[z][0] == 0)
-					z++;
-				if (val->players[z][0] != 0)
-					ft_strcat(val->players[i], val->players[z]);
+				ft_strcat(val->players[i], val->players[z]);
+				z++;
 			}
 		}
 		i++;

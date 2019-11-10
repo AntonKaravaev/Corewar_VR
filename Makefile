@@ -6,7 +6,7 @@
 #    By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/25 01:00:32 by crenly-b          #+#    #+#              #
-#    Updated: 2019/11/07 13:03:51 by crenly-b         ###   ########.fr        #
+#    Updated: 2019/11/10 16:49:09 by crenly-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ objs/%.o: srcs/%.c includes/corewar.h
 
 $(NAME): objs make_lib $(OBJS) libft/libft.a 
 		@gcc -o $(NAME) $(OBJS) $(LIB)
-		@echo ✅lem-in compiled!
+		@echo ✅ Corewar compiled!
 
 make_lib:
 	@make -C libft
