@@ -6,7 +6,7 @@
 #    By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/25 01:00:32 by crenly-b          #+#    #+#              #
-#    Updated: 2019/11/10 16:49:09 by crenly-b         ###   ########.fr        #
+#    Updated: 2019/11/12 15:06:07 by crenly-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FLAGS = -Wall -Wextra -Werror
 HEADER = -I includes -I libft/includes
 LIB		= -L libft/ -lft
 
-LIST = main
+LIST = main validation  validation_sup1 validation_sup2 delete_after_fin_project
 
 OBJS = $(addprefix objs/, $(addsuffix .o, $(LIST)))
 

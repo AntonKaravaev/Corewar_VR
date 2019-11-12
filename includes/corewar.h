@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 13:55:33 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/11/07 16:52:04 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/11/12 15:00:07 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,32 @@
 // -dump
 // - vm
 
-// has too large a code (993 bytes > 682 bytes)
+// has too large a code (993 bytes > 682 bytes) 
+// Champion exec code
 
 
 typedef struct	s_val
 {
-    char    str_of_players[STR_OF_PLAYERS];
-    char    players[MAX_PLAYERS][MAX_LENGTH_OF_PLAYER];
-    char    temp_players[MAX_PLAYERS][MAX_LENGTH_OF_PLAYER];
-    int     amount_of_players;
-    int     flag_dump; // -dump
-    int     dump_value; // -dump
-    int     flag_visual; // -v
+    char	str_of_players[STR_OF_PLAYERS];
+    char	players[MAX_PLAYERS][MAX_LENGTH_OF_PLAYER];
+    char	temp_players[MAX_PLAYERS][MAX_LENGTH_OF_PLAYER];
+    int		amount_of_players;
+    int		flag_dump; // -dump
+    int		dump_value; // -dump
+    int		flag_visual; // -v
 }				t_val;
 
 
 int				main(int argc, char *argv[]);
+void			ft_find_players_and_flags(t_val *val);
+int				ft_if_minus_n(char ***str, t_val *val, int *i, int *pos);
+int				ft_if_dump(char ***str, t_val *val, int *i);
+void            ft_print_players(t_val *val);
+void			ft_sort_players(t_val *val);
+int				ft_if_point_cor(char ***str, t_val *val, int *i, int *j);
+int				ft_check_pos(int pos);
+int				ft_check_dump(int dump);
+int				ft_if_visual(char ***str, t_val *val, int *i);
 
 #endif
 
