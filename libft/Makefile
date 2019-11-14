@@ -6,7 +6,7 @@
 #    By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/09 15:14:49 by crenly-b          #+#    #+#              #
-#    Updated: 2019/11/07 13:15:02 by crenly-b         ###   ########.fr        #
+#    Updated: 2019/11/12 14:03:34 by crenly-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ obj/%.o: src/%.c
 
 $(NAME): obj $(OBJ_LIBFT) $(OBJ_PRINTF)
 	@ar -rc $(NAME) $(OBJ_LIBFT) $(OBJ_PRINTF)
-	@echo 📖libft compiled!
+	@echo 📖 libft compiled!
 
 obj:
 	@mkdir obj  2> /dev/null || true

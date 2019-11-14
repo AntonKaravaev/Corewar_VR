@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 13:55:33 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/11/12 15:00:07 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/11/14 13:08:44 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,22 @@
 // has too large a code (993 bytes > 682 bytes) 
 // Champion exec code
 
+typedef struct	s_p
+{
+    int     fd;
+    char    m_h; // magic header
+    char    champ_name[100];
+    int     first_null;
+    char    cecs; // champion exec code size
+    char    champ_comment;
+    int     second_null;
+    char    cec; // champion exec code
+}				t_p;
 
 typedef struct	s_val
 {
     char	str_of_players[STR_OF_PLAYERS];
+    t_p     inf_play[MAX_PLAYERS];
     char	players[MAX_PLAYERS][MAX_LENGTH_OF_PLAYER];
     char	temp_players[MAX_PLAYERS][MAX_LENGTH_OF_PLAYER];
     int		amount_of_players;
@@ -41,7 +53,6 @@ typedef struct	s_val
     int		dump_value; // -dump
     int		flag_visual; // -v
 }				t_val;
-
 
 int				main(int argc, char *argv[]);
 void			ft_find_players_and_flags(t_val *val);
@@ -53,6 +64,7 @@ int				ft_if_point_cor(char ***str, t_val *val, int *i, int *j);
 int				ft_check_pos(int pos);
 int				ft_check_dump(int dump);
 int				ft_if_visual(char ***str, t_val *val, int *i);
+void		    ft_analyse_players(t_val *val);
 
 #endif
 

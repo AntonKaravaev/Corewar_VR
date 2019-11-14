@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:06:15 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/11/12 15:06:50 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/11/14 13:10:55 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,18 @@ void        ft_sort_players(t_val *val)
 		i++;
 	}
     ft_sort_players_sup1(val);
+}
+
+
+void		ft_analyse_players(t_val *val)
+{
+	int i;
+
+	i = 0;
+	while (i < val->amount_of_players)
+	{
+		val->inf_play[i].fd = open(val->players[i], O_RDWR);
+		ft_printf("fd = %d\n", val->inf_play[i].fd);
+		i++;
+	}
 }

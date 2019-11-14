@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 13:00:55 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/11/12 15:07:21 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/11/14 12:56:47 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		main(int argc, char *argv[])
 	{
 		ft_catch_argv(&val, argc, &argv);
 		ft_find_players_and_flags(&val);
+		ft_analyse_players(&val);
 	}
 	else
 		ft_error("Not enough arguments.");
