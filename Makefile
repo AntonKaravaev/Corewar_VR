@@ -16,13 +16,14 @@ FLAGS = -Wall -Wextra -Werror
 HEADER = -I includes -I libft/includes
 LIB		= -L libft/ -lft
 
-LIST = main validation  validation_sup1 validation_sup2 delete_after_fin_project
+LIST = main validation  validation_sup1 validation_sup2 delete_after_fin_project \
+		olya_read_memory olya_init_game olya_show olya_operation ft_zjmp
 
 OBJS = $(addprefix objs/, $(addsuffix .o, $(LIST)))
 
 all: $(NAME)
 
-objs/%.o: srcs/%.c includes/corewar.h
+objs/%.o: srcs/%.c includes/corewar.h includes/op.h
 		gcc $(FLAGS) -c $< -o $@ $(HEADER)
 
 $(NAME): objs make_lib $(OBJS) libft/libft.a 

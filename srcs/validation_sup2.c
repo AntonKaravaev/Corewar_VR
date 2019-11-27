@@ -67,15 +67,23 @@ void        ft_sort_players(t_val *val)
 }
 
 
-void		ft_analyse_players(t_val *val)
+void		ft_analyse_players(t_val *val, t_champ *champ)
 {
 	int i;
+	int fd;
 
 	i = 0;
 	while (i < val->amount_of_players)
 	{
-		val->inf_play[i].fd = open(val->players[i], O_RDWR);
-		ft_printf("fd = %d\n", val->inf_play[i].fd);
+		if ((fd = open(val->players[i], O_RDWR)) < 2)
+		{
+			ft_printf("%d\n", fd);
+			ft_error("Bad file.\n");
+		}
+		init_champ(fd, &(champ[i]));
+		ft_printf("name = %s\n", champ[i].name); 
+		ft_printf("fd = %d\n", fd);
 		i++;
 	}
+	
 }
