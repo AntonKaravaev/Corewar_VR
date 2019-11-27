@@ -50,27 +50,26 @@ void addition_operation(t_game *game, t_carriage *car, uint8_t operation)
 	
 } 
 
-void operation(t_game *game, t_carriage *car, uint8_t operation)
+void	operation(t_game *game, t_carriage *car, uint8_t oper)
 {
-	/*
-	if (operation == 0x01)
-		car->addr = (car->addr + ft_live(game, car)) % MEM_SIZE;
-	else if (operation == 0x02)
-		car->addr = (car->addr + ft_ld(game, car)) % MEM_SIZE;
-	else if (operation == 0x03)
-		car->addr = (car->addr + ft_st(game, car)) % MEM_SIZE;
-	else if (operation == 0x04)
-		car->addr = (car->addr + ft_add(game, car)) % MEM_SIZE;
-	else if (operation == 0x05)
-		car->addr = (car->addr + ft_sub(game, car)) % MEM_SIZE;
-	else if (operation == 0x06)
-		car->addr = (car->addr + ft_and(game, car)) % MEM_SIZE;
-	else if (operation == 0x07)
-		car->addr = (car->addr + ft_or(game, car)) % MEM_SIZE;
-	else if (operation == 0x08)
-		car->addr = (car->addr + ft_xor(game, car)) % MEM_SIZE;
-	*/
-	//else
-		addition_operation(game, car, operation);
+	
+	if (oper == 0x01)
+		ft_live(game, car);
+	else if (oper == 0x02)
+		ft_ld(game, car);
+	if (oper == 0x03)
+		ft_st(game, car);
+	else if (oper == 0x04)
+		ft_add(game, car);
+	else if (oper == 0x05)
+		ft_sub(game, car);
+	else if (oper == 0x06)
+		ft_and(game, car);
+	else if (oper == 0x07)
+		ft_or(game, car);
+	else if (oper == 0x08)
+		ft_xor(game, car);
+	else
+		addition_operation(game, car, oper); // Нужно ли oper???
 
 }

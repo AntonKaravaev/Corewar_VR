@@ -6,7 +6,7 @@
 #    By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/25 01:00:32 by crenly-b          #+#    #+#              #
-#    Updated: 2019/11/12 15:06:07 by crenly-b         ###   ########.fr        #
+#    Updated: 2019/11/27 17:15:46 by crenly-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ HEADER = -I includes -I libft/includes
 LIB		= -L libft/ -lft
 
 LIST = main validation  validation_sup1 validation_sup2 delete_after_fin_project \
-		olya_read_memory olya_init_game olya_show olya_operation ft_zjmp
+		olya_read_memory olya_init_game olya_show olya_operation ft_zjmp anton_func_1_4 \
+		anton_func_5_8 \
 
 OBJS = $(addprefix objs/, $(addsuffix .o, $(LIST)))
 

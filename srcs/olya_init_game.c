@@ -2,20 +2,21 @@
 
 int revision(t_game *game)
 {
-	t_list *list;
-	t_carriage *car;
-	t_list *pr_list;
-	char *str;
+	t_list		*list;
+	t_list		*pr_list;
+	t_carriage	*car;
+	//char		*str;
 
 	game->checks++;
 
 	//dell died carriage
 	
 	//for test
+	/*
 	ft_printf("введите переменную live\n");
 	get_next_line(0, &str);
 	game->live = ft_atoi(str);
-
+*/
 	list = game->carriages;
 	while (list != NULL)
 	{
@@ -77,12 +78,12 @@ void start_game(t_game *game, int dump_value)
 		while (list != NULL) // hook of carriage
 		{
 			car = (t_carriage*)(list->content);
-			if (car->hookbefexe == 0) 
-				cycles_before_execution(car, car->operation);
+			if (car->hookbefexe == 0)
+				cycles_before_execution(car, game->arena[car->pc]);
 			if (car->hookbefexe > 0)
 				car->hookbefexe--;
 			if (car->hookbefexe == 0)
-				//operations(game, car, car->operation);// доделать
+				operation(game, car, game->arena[car->pc]);// доделать
 			list=list->next;
 		}
 		if (left_to_check <= 0)//или в начале?
@@ -96,11 +97,11 @@ void start_game(t_game *game, int dump_value)
 
 void            init_game(t_game *game, int amount_of_players, int dump_value)
 {
-	int i;
-	int j;
-	int bite;
-	t_carriage new_carriage;
-	t_list *new;
+	int			i;
+	int			j;
+	int			bite;
+	t_carriage	new_carriage;
+	t_list		*new;
 
 	//init_arena
 	dump_value = 0;
@@ -128,7 +129,7 @@ void            init_game(t_game *game, int amount_of_players, int dump_value)
 	i = 0;
 	while (++i  < REG_NUMBER)
 		new_carriage.reg[i] = 0;
-	new_carriage.operation = 0; // norm? 
+	new_carriage.oper = 0; // norm? 
 	new_carriage.live = -1;
 	new_carriage.carry = 0;
 	new_carriage.step = 0; //right ?
@@ -137,7 +138,7 @@ void            init_game(t_game *game, int amount_of_players, int dump_value)
 	while(++i <= amount_of_players)
 	{
 		new_carriage.numb = i;
-		new_carriage.pc = (MEM_SIZE / amount_of_players) * i;
+		new_carriage.pc = (MEM_SIZE / amount_of_players) * (i - 1);
 		new_carriage.reg[0] = -i;
 		if (!(new = ft_lstnew((void*)&new_carriage, sizeof(t_champ))))
 			ft_error("memor :(");
