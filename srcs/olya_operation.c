@@ -2,6 +2,22 @@
 
 void cycles_before_execution(t_carriage *car, uint8_t oper)
 {
+	
+	int i;
+
+	i = 0;
+	while (i < 16)
+	{
+		if (op_tab[i].code == oper)
+		{
+			car->hookbefexe = op_tab[i].wait_cycles;	
+			break;
+		}
+		i++;
+	}
+	if (i == 16)
+		car->hookbefexe = 0;
+/*
 	if (oper == 0x10)
 		car->hookbefexe = 2;
 	else if (oper == 0x02 || oper == 0x3)
@@ -22,54 +38,63 @@ void cycles_before_execution(t_carriage *car, uint8_t oper)
 		car->hookbefexe = 1000;
 	else
 		car->hookbefexe = 0;
+		*/
+	car->operation = oper;
 }
 
-
-void addition_operation(t_game *game, t_carriage *car, uint8_t operation)
+void	addition_operation(t_val * val, t_game *game, t_carriage *car, uint8_t operation)
 {
 	if (operation == 0x09)
-		car->pc = (car->pc + ft_zjmp(game, car)) % MEM_SIZE;
-		/*
+		car->pc = op_zjmp(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x0a)
-		car->addr = (car->addr + ft_ldi(game, car)) % MEM_SIZE;
+		car->pc = op_ldi(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x0b)
-		car->addr = (car->addr + ft_sti(game, car)) % MEM_SIZE;
+		car->pc = op_sti(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x0c)
-		car->addr = (car->addr + ft_fork(game, car)) % MEM_SIZE;
+		car->pc = op_fork(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x0d)
-		car->addr = (car->addr + ft_lld(game, car)) % MEM_SIZE;
+		car->pc = op_lld(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x0e)
-		car->addr = (car->addr + ft_lldi(game, car)) % MEM_SIZE;
+		car->pc = op_lldi(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x0f)
-		car->addr = (car->addr + ft_lfork(game, car)) % MEM_SIZE;
+		car->pc = op_lfork(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x10)
-		car->addr = (car->addr + ft_aff(game, car)) % MEM_SIZE;
-	*/
+		car->pc = op_aff(val, game, car, op_tab[operation - 1]);
 	else
 		car->pc = (car->pc + 1) % MEM_SIZE;
 	
 } 
 
-void	operation(t_game *game, t_carriage *car, uint8_t oper)
+void	operation(t_val * val, t_game *game, t_carriage *car, uint8_t operation)
 {
-	
-	if (oper == 0x01)
-		ft_live(game, car);
-	else if (oper == 0x02)
-		ft_ld(game, car);
-	if (oper == 0x03)
-		ft_st(game, car);
-	else if (oper == 0x04)
-		ft_add(game, car);
-	else if (oper == 0x05)
-		ft_sub(game, car);
-	else if (oper == 0x06)
-		ft_and(game, car);
-	else if (oper == 0x07)
-		ft_or(game, car);
-	else if (oper == 0x08)
-		ft_xor(game, car);
-	else
-		addition_operation(game, car, oper); // Нужно ли oper???
+	/*
+	int i;
 
+	i = 0;
+	while (i < 18)
+	{
+		if (op_tab[i].code == operation)
+			op_tab[i].func(game, car);
+	}
+	*/
+//	ft_printf("%x\n", operation);
+	car->save_pc = car->pc % MEM_SIZE;
+	if (operation == 0x01)
+		car->pc = op_live(val, game, car, op_tab[operation - 1]);
+	else if (operation == 0x02)
+		car->pc = op_ld(val, game, car, op_tab[operation - 1]);
+	else if (operation == 0x03)
+		car->pc = op_st(val, game, car, op_tab[operation - 1]);
+	else if (operation == 0x04)
+		car->pc = op_add(val, game, car, op_tab[operation - 1]);
+	else if (operation == 0x05)
+		car->pc = op_sub(val, game, car, op_tab[operation - 1]);
+	else if (operation == 0x06)
+		car->pc = op_and(val, game, car, op_tab[operation - 1]);
+	else if (operation == 0x07)
+		car->pc = op_or(val, game, car, op_tab[operation - 1]);
+	else if (operation == 0x08)
+		car->pc = op_xor(val, game, car, op_tab[operation - 1]);
+	else
+		addition_operation(val, game, car, operation);
 }

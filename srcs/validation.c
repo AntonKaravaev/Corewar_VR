@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:04:31 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/11/12 15:04:04 by crenly-b         ###   ########.fr       */
+/*   Updated: 2020/01/19 15:31:25 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,6 @@ int		ft_check_pos(int pos)
 	if (pos < 0 || pos >= MAX_PLAYERS)
 		ft_error("Incorrect position of the player.");
 	return (pos);
-}
-
-int		ft_check_dump(int dump)
-{
-	if (dump <= 0)
-		ft_error("Incorrect dump.");
-	return (1);
 }
 
 void	ft_find_flags(t_val *val, char ***str)
@@ -43,11 +36,13 @@ void	ft_find_flags(t_val *val, char ***str)
             ;
 		else if (ft_if_dump(str, val, &i) == 1)
 		    ;
+		else if (ft_dump_param(str, val, &i) == 1)
+		    ;
+		else if (ft_if_aff_flag(str, val, &i) == 1)
+		    ;
 		else if (ft_if_visual(str, val, &i) == 1)
 		    ;
 	}
-	ft_sort_players(val);
-    ft_print_players(val);
 }
 
 void	ft_find_players_and_flags(t_val *val)
@@ -57,5 +52,6 @@ void	ft_find_players_and_flags(t_val *val)
 	if (!(str = ft_strsplit(val->str_of_players, ' ')))
 		ft_error("Some problems with input.");
 	ft_find_flags(val, &str);
+	ft_sort_players(val);
 	ft_str2del(&str);
 }

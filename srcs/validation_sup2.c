@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:06:15 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/11/14 13:10:55 by crenly-b         ###   ########.fr       */
+/*   Updated: 2020/01/19 15:32:42 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void        ft_sort_players(t_val *val)
 }
 
 
-void		ft_analyse_players(t_val *val, t_champ *champ)
+void		ft_analyse_players(t_val *val, t_champ *champ, int *game_champs)
 {
 	int i;
 	int fd;
@@ -81,9 +81,22 @@ void		ft_analyse_players(t_val *val, t_champ *champ)
 			ft_error("Bad file.\n");
 		}
 		init_champ(fd, &(champ[i]));
-		ft_printf("name = %s\n", champ[i].name); 
-		ft_printf("fd = %d\n", fd);
 		i++;
 	}
-	
+	(*game_champs) = val->amount_of_players;
+}
+
+int			ft_if_aff_flag(char ***str, t_val *val, int *i)
+{
+	if (ft_strequ((*str)[*i], "-a") == 1 || val->value_param == 30)
+	{
+		if (val->flag_aff_flag == 0 || val->value_param == 30)
+		{
+			val->flag_aff_flag = 1;
+			return (1);
+		}
+		else
+			ft_error("Incorrect input aff flag \"-a\".");
+	}
+	return (0);
 }

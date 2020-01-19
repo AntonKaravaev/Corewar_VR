@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   validation_sup3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/19 22:11:24 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/01/26 23:18:28 by crenly-b         ###   ########.fr       */
+/*   Created: 2019/12/14 20:28:54 by crenly-b          #+#    #+#             */
+/*   Updated: 2019/12/14 20:41:51 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "corewar.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void		ft_old_error(char **str)
 {
-	size_t i;
+	ft_printf("Incorrect input = %s.\n", *str);
+	exit (-1);
+}
 
-	i = 0;
-	if (n == 0)
-		return (0);
-	while (s1[i] && s2[i] && s1[i] == s2[i] && i < n - 1)
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+int         ft_check_dump(char ***str, int number, int *i)
+{
+    if (number == 2 || number == 4 || number == 8
+        || number == 16 || number == 30)
+        return (number);
+    else
+        ft_old_error(&(*str)[*i]);
+    return (0);
 }

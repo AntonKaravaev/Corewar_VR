@@ -6,11 +6,17 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 13:00:55 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/11/14 12:56:47 by crenly-b         ###   ########.fr       */
+/*   Updated: 2020/01/19 14:54:23 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+
+int	ft_test(int i)
+{
+	return (i);
+}
 
 void	ft_val_initial(t_val *val)
 {
@@ -33,7 +39,10 @@ void	ft_val_initial(t_val *val)
 	val->amount_of_players = 0;
 	val->flag_dump = 0;
     val->flag_visual = 0;
-	val->dump_value = 0;
+	val->dump_value = -1;
+	val->v_param = 0;
+	val->value_param = 0;
+	val->flag_aff_flag = 0;
 }
 
 void	ft_catch_argv(t_val *val, int ac, char ***str)
@@ -54,16 +63,16 @@ int		main(int argc, char *argv[])
 {
 	t_val	val;
 	t_game	game;
-	int		dump_value;
 
-	dump_value = 0; //найти это значение из консоли 
 	ft_val_initial(&val);
 	if (argc >= 2)
 	{
 		ft_catch_argv(&val, argc, &argv);
 		ft_find_players_and_flags(&val);
-		ft_analyse_players(&val, game.champ);
-		init_game(&game, val.amount_of_players, dump_value);
+		ft_analyse_players(&val, game.champ, &(game.champs));
+		ft_introducing_contestants(game.champ, game.champs);
+		init_game(&game, val.amount_of_players);
+		start_game(&val, &game, val.dump_value);
 	}
 	else
 		ft_error("Not enough arguments.");

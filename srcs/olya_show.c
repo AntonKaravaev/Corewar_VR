@@ -5,20 +5,25 @@ void show_arena(t_game *game)
     int i;
 
     i = 0;
-    
-    //printf("\033[31m red\n\033[32m green\n\033[33m yellow\n\033[34m blue\n\033[0m white\n");
-    ft_printf("\nARENA\n");
+    //ft_printf("\nARENA\n");
+    ft_printf("%s : ", "0x0000");
     while (i <  MEM_SIZE)
     {
-        ft_printf("%.2x", game->arena[i]);
+        // if ((i + 1) % (2 * 32) == 0)
+        // {
+        //     ft_printf("%.2x", game->arena[i]);
+        // }
+        // else
+            ft_printf("%.2x ", game->arena[i]);
         i++;
-        if (i % (2 * 32) == 0)//last лишний
+        if (i % (2 * 32) == 0)
         {
-            //ft_printf("\033[36m");
             ft_putchar('\n');
+            if (i != 256 * 16)
+                ft_printf("%#.4x : ", i);
         }
-        else if (i % 2 == 0)//last лишний
-            ft_putchar(' ');
+        //else if (i % 2 == 0)//last лишний
+         //   ft_putchar(' ');
     }
 }
 
@@ -42,7 +47,7 @@ void show_carriage_list(t_list *car_list)
         //for test!!!!
        // if (car->numb == 2)
        //     car->live = 0;
-        ft_printf("numb = %d\ncarry = %d\n oper = %.2x\n", car->numb, car->carry, car->oper);
+        ft_printf("numb = %d\ncarry = %d\n operation = %.2x\n", car->numb, car->carry, car->operation);
         ft_printf("live = %d\naddr = %d\n step = %d\n", car->live, car->pc, car->step);
         i = 0;
         while (i  < REG_NUMBER)
